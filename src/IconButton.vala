@@ -23,6 +23,7 @@ class IconButton : Gtk.Button {
         var hbox = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 6);
         hbox.append (image);
         hbox.append (text);
+        hbox.set_name("hbox");
 
         this.child = hbox;
     }

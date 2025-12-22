@@ -2,6 +2,7 @@ public class Platinum : Gtk.Application {
     private const string APP_ID = "io.github.redstone-dev.Platinum";
 
     public TabbedWebView tabbed_web_view;
+    public Gtk.Box tab_bar_action_box;
 
     // HeaderBar contents
     private Gtk.Button settings_button;
@@ -74,13 +75,8 @@ public class Platinum : Gtk.Application {
 
         this.tabbed_web_view = new TabbedWebView ();
         this.tabbed_web_view.add_new_tab ("file://" + Environment.get_current_dir () + "/../pages/quickstart.html");
+        populate_tab_bar_actions ();
 
-        this.new_tab_button = new IconButton.flat ("tab-new-symbolic");
-        this.new_tab_button.clicked.connect (() => {
-            this.tabbed_web_view.add_new_tab ("https://google.com");
-            this.tabbed_web_view.notebook.set_current_page (this.tabbed_web_view.notebook.get_n_pages () - 1);
-        });
-        this.tabbed_web_view.notebook.set_action_widget (this.new_tab_button, Gtk.PackType.START);
         this.back_button = new IconButton.flat ("go-previous-symbolic");
         this.back_button.add_css_class ("circular");
         this.back_button.clicked.connect (() =>
@@ -118,6 +114,17 @@ public class Platinum : Gtk.Application {
 
         this.window.child = hbox;
         this.window.present ();
+    }
+
+    public void populate_tab_bar_actions () {
+
+        this.new_tab_button = new IconButton.flat ("tab-new-symbolic");
+        this.new_tab_button.clicked.connect (() => {
+            this.tabbed_web_view.add_new_tab ("https://google.com");
+            this.tabbed_web_view.notebook.set_current_page (this.tabbed_web_view.notebook.get_n_pages () - 1);
+        });
+
+        this.tabbed_web_view.notebook.set_action_widget (this.new_tab_button, Gtk.PackType.START);
     }
 
     public void populate_settings_sidebar () {
