@@ -15,7 +15,6 @@ sources = files(
   'src/SettingsSidebar.vala',
   'src/TabbedWebView.vala',
   'src/main.vala',
-) + files(
   'src/Plugin.vala',
 )
 
