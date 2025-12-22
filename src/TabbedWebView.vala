@@ -34,6 +34,7 @@ public class TabbedWebView : Gtk.Box {
         this.notebook.append_page (webview, label_and_button_box);
 
         close_tab_button.clicked.connect (() => {
+            if (this.notebook.pages.get_n_items () < 1) return;
             var page = this.notebook.page_num (webview);
             this.notebook.remove_page (page);
             webview.destroy ();
