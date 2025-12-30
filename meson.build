@@ -16,6 +16,7 @@ sources = files(
   'src/TabbedWebView.vala',
   'src/main.vala',
   'src/Plugin.vala',
+  'src/BookmarksButton.vala'
 )
 
 executable('platinum-gtk', sources, dependencies: dependencies)

@@ -8,6 +8,7 @@ public class Platinum : Gtk.Application {
     private Gtk.Button settings_button;
 
     private Gtk.Button new_tab_button;
+    private BookmarksButton bookmarks_button;
     private Gtk.Entry url_bar;
     private Gtk.Button go_button;
 
@@ -117,14 +118,34 @@ public class Platinum : Gtk.Application {
     }
 
     public void populate_tab_bar_actions () {
-
+        this.tab_bar_action_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 2);
+        this.settings_sidebar.settings_changed.connect ((key) => {
+            if (key == "platinum.ui.tabBarEdge") {
+                switch (settings_sidebar.get_field(key).get_string ()) {
+                    case "Top":
+                    case "Bottom":
+                        this.tab_bar_action_box.set_orientation (Gtk.Orientation.HORIZONTAL);
+                        break;
+                    case "Left":
+                    case "Right":
+                        this.tab_bar_action_box.set_orientation (Gtk.Orientation.VERTICAL);
+                        break;
+                }
+            }
+        });
         this.new_tab_button = new IconButton.flat ("tab-new-symbolic");
         this.new_tab_button.clicked.connect (() => {
             this.tabbed_web_view.add_new_tab ("https://google.com");
             this.tabbed_web_view.notebook.set_current_page (this.tabbed_web_view.notebook.get_n_pages () - 1);
         });
+        
+        this.bookmarks_button = new BookmarksButton ();
+        this.bookmarks_button.webview = this.tabbed_web_view;
 
-        this.tabbed_web_view.notebook.set_action_widget (this.new_tab_button, Gtk.PackType.START);
+        this.tab_bar_action_box.append (this.bookmarks_button);
+        this.tab_bar_action_box.append (this.new_tab_button);
+
+        this.tabbed_web_view.notebook.set_action_widget (this.tab_bar_action_box, Gtk.PackType.START);
     }
 
     public void populate_settings_sidebar () {
