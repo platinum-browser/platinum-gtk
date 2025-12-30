@@ -1,6 +1,6 @@
 # Platinum
 
-![Screenshot of Platinum, viewing the Wikipedia article for *Daucus carota*.](readme/WikiScreenshot3.png)
+![Screenshot of Platinum, viewing the Wikipedia article for *Daucus carota*.](readme/WikiScreenshot4.png)
 
 A WebKitGTK-based browser written in Vala.
 
