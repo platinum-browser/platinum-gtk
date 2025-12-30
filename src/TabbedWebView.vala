@@ -25,6 +25,8 @@ public class TabbedWebView : Gtk.Box {
         webview.set_vexpand (true);
 
         var tab_label = new Gtk.Label ("Loading...");
+        tab_label.set_hexpand (true);
+        tab_label.set_halign (Gtk.Align.START);
         var close_tab_button = new IconButton.flat ("window-close-symbolic");
         close_tab_button.add_css_class ("circular");
         var label_and_button_box = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 4);
